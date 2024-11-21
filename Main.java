@@ -29,5 +29,14 @@ public class Main {
         System.out.println("");
         System.out.println("*****************************************************************");
         System.out.println("*****************************************************************\n");
+
+        Scanner reader = new Scanner(System.in);
+        // takes user input
+
+        System.out.println("Enter a number to continue:\n");
+        System.out.println(
+                "0 = Play Game \t|\t 1 = Exit\n" );
+        System.out.print("Enter a number: ");
+
     }
 }
