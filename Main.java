@@ -38,5 +38,18 @@ public class Main {
                 "0 = Play Game \t|\t 1 = Exit\n" );
         System.out.print("Enter a number: ");
 
+        int[][] colours = {
+                { 255, 0, 0 }, // Red
+                { 0, 255, 0 }, // Green
+                { 0, 0, 255 }, // Blue
+                { 255, 255, 255 } // White
+        };
+
+        // This for loop iterates through all colours in the colours array.
+        for (int[] rgb : colours) {
+            swiftBot.fillUnderlights(rgb);
+            Thread.sleep(300);
+        }
+
     }
 }
