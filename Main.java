@@ -7,7 +7,7 @@ import java.util.Scanner; // imports java ability to take user input
 
 
 public class Main {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws InterruptedException {
         SwiftBotAPI robot = new SwiftBotAPI();
 
         // creates menu for user interaction
@@ -35,15 +35,17 @@ public class Main {
                 { 255, 255, 255 } // White
         };
         input=reader.nextInt();
-	    if(input==0) {
-        // This for loop iterates through all colours in the colours array.
-        	for (int[] rgb : colours) {
-            	robot.fillUnderlights(rgb);
-            	Thread.sleep(300);
-        	}
-      	    }
-            else{
-		   break;
-	    }
+        if (input == 0) {
+            // This for loop iterates through all colours in the colours array.
+            for (int[] rgb : colours) {
+                robot.fillUnderlights(rgb);
+                Thread.sleep(300);
+            }
+        } else if (input == 1) {
+            System.exit(0); // Exits the program if the user enters 1
+        } else {
+            System.out.println("Invalid input. Please enter only 0 or 1.");
+        }
+
     }
 }
