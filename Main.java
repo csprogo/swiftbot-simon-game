@@ -37,10 +37,13 @@ public class Main {
         input=reader.nextInt();
 	    if(input==0) {
         // This for loop iterates through all colours in the colours array.
-        for (int[] rgb : colours) {
-            robot.fillUnderlights(rgb);
-            Thread.sleep(300);
-        }
-      }
+        	for (int[] rgb : colours) {
+            	robot.fillUnderlights(rgb);
+            	Thread.sleep(300);
+        	}
+      	    }
+            else{
+		   break;
+	    }
     }
 }
