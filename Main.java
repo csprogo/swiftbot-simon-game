@@ -26,6 +26,7 @@ public class Main {
         System.out.println(
                 "0 = Play Game \t|\t 1 = Exit\n" );
         System.out.print("Enter a number: ");
+        int input;
 
         int[][] colours = {
                 { 255, 0, 0 }, // Red
@@ -33,12 +34,13 @@ public class Main {
                 { 0, 0, 255 }, // Blue
                 { 255, 255, 255 } // White
         };
-
+        input=reader.nextInt();
+	    if(input==0) {
         // This for loop iterates through all colours in the colours array.
         for (int[] rgb : colours) {
             robot.fillUnderlights(rgb);
             Thread.sleep(300);
         }
-
+      }
     }
 }
