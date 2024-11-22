@@ -7,20 +7,9 @@ import java.util.Scanner; // imports java ability to take user input
 
 
 public class Main {
-    static SwiftBotAPI swiftBot;
-    public static void main(String[] args) throws InterruptedException {
-        try {
-            swiftBot = new SwiftBotAPI();
-        } catch (Exception e) {
-            /*
-             * Outputs a warning if I2C is disabled. This only needs to be turned on once,
-             * so you won't need to worry about this problem again!
-             */
-            System.out.println("\nI2C disabled!");
-            System.out.println("Run the following command:");
-            System.out.println("sudo raspi-config nonint do_i2c 0\n");
-            System.exit(5);
-        }
+    public static void main(String[] args)  {
+        SwiftBotAPI robot = new SwiftBotAPI();
+
         // creates menu for user interaction
         System.out.println("\n*****************************************************************");
         System.out.println("*****************************************************************");
@@ -47,7 +36,7 @@ public class Main {
 
         // This for loop iterates through all colours in the colours array.
         for (int[] rgb : colours) {
-            swiftBot.fillUnderlights(rgb);
+            robot.fillUnderlights(rgb);
             Thread.sleep(300);
         }
 
