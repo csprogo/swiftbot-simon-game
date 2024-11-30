@@ -1,19 +1,22 @@
+//imports
+
 import swiftbot.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
+// main class
 public class Main {
     static SwiftBotAPI swiftBot;
     static Random random = new Random();
     static List<Button> sequence = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
-    static final int MAX_LEVELS = 5; // Maximum number of levels
+    // creates a max number of levels
+    static final int MAX_LEVELS = 5; 
 
     public static void main(String[] args) throws InterruptedException {
-        // Initialize SwiftBot API
+        // initializes the swiftbot api, taken and modified from zears program
         try {
             swiftBot = new SwiftBotAPI();
         } catch (Exception e) {
@@ -28,7 +31,7 @@ public class Main {
         System.out.println("Press ENTER to start the game.");
         scanner.nextLine();
 
-        // Start the game
+        // game starts here
         playSimonGame();
     }
 
@@ -38,41 +41,42 @@ public class Main {
         while (level <= MAX_LEVELS) {
             System.out.println("\nLevel " + level);
 
-            // Add a random button to the sequence for the current level
+            
             addToSequence();
 
-            // Display the sequence for the user to memorize
+           
             displaySequence();
 
-            // Check if the user correctly replicates the sequence
+            // checks if the user entered the correct input 
             if (!getUserInput()) {
                 System.out.println("\nGame Over! You reached level " + level);
                 System.out.println("Exiting the program...");
-                System.exit(0); // Exit the program after losing
+                System.exit(0); // closes the program when the user gets wronng
             }
 
             System.out.println("SUCCESS! Moving to the next level.");
             level++;
         }
 
-        // Player has successfully completed all levels
+        // once the player wins the whole game
         System.out.println("\nCongratulations! You've completed all 5 levels of the Simon Game!");
         System.out.println("Exiting the program...");
-        System.exit(0); // Exit the program after winning
+        System.exit(0); 
     }
 
     public static void addToSequence() {
         Button[] buttons = {Button.A, Button.B, Button.X, Button.Y};
-        sequence.add(buttons[random.nextInt(buttons.length)]); // Add a random button to the sequence
+        // adds a randomly generated number to the sequence
+        sequence.add(buttons[random.nextInt(buttons.length)]); 
     }
 
     public static void displaySequence() throws InterruptedException {
         System.out.println("Watch the sequence!");
         for (Button button : sequence) {
-            swiftBot.setButtonLight(button, true); // Light up the button
-            Thread.sleep(1000); // Wait for 1 second
-            swiftBot.setButtonLight(button, false); // Turn off the light
-            Thread.sleep(500); // Wait for half a second before the next light
+            swiftBot.setButtonLight(button, true); //button lights up
+            Thread.sleep(1000); // 1 second wait
+            swiftBot.setButtonLight(button, false); // light turns off
+            Thread.sleep(500); //program waits half a second before the next light
         }
     }
 
@@ -80,10 +84,10 @@ public class Main {
         System.out.println("Now it's your turn! Press the buttons in the same order.");
         List<Button> userSequence = new ArrayList<>();
 
-        // Define the list of available buttons manually
+        // array of potential buttons in the swifbot
         Button[] buttons = {Button.A, Button.B, Button.X, Button.Y};
 
-        // Enable all buttons for user input
+        
         for (Button button : buttons) {
             swiftBot.enableButton(button, () -> {
                 userSequence.add(button);
@@ -91,17 +95,17 @@ public class Main {
             });
         }
 
-        // Wait for user input until the sequence is complete
+        // waits to get user input
         while (userSequence.size() < sequence.size()) {
-            Thread.sleep(100); // Check every 100ms
+            Thread.sleep(100); // runs a check every 100ms
         }
 
-        // Disable all buttons
+       
         for (Button button : buttons) {
             swiftBot.disableButton(button);
         }
 
-        // Validate user input
+        
         for (int i = 0; i < sequence.size(); i++) {
             if (sequence.get(i) != userSequence.get(i)) {
                 System.out.println("Oops! You pressed the wrong button.");
